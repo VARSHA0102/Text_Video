@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text to Video Generator</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@400;500&display=swap"
+        rel="stylesheet">
+    <style>
+        /* General Page Styling */
+        body {
+            margin: 0;
+            font-family: 'Quicksand', sans-serif;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 50%, #fad0c4 100%);
+            color: #fff;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .container-custom {
+            background-color: #ffecf0;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 1s ease-in-out;
+            z-index: 1; /* Ensure content is on top of the background leaves */
+        }
+        
+        .header {
+            font-size: 36px;
+            color: #ff577f;
+            font-weight: 700;
+            margin-bottom: 20px;
+            font-family: 'Pacifico', cursive;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            position: relative;
+        }
+        
+        .content {
+            background-color: #fef9ff;
+            box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
+            border-radius: 15px;
+            padding: 30px;
+        }
+        
+        .textarea {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #ff6f91;
+            border-radius: 10px;
+            font-size: 16px;
+            color: #333;
+            background-color: #fff5f7;
+        }
+        
+        .button {
+            background-color: #ff6f91;
+            color: #fff;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 30px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+        
+        .download-link {
+            color: #ff6f91;
+            font-weight: bold;
+        }
+        
+        /* Multiple Moving Leaves Background */
+        body::before, body::after, .extra-leaf1, .extra-leaf2, .extra-leaf3 {
+            content: '';
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background-image: url('https://cdn-icons-png.flaticon.com/512/3425/3425417.png'); /* Leaf icon */
+            background-size: contain;
+            background-repeat: no-repeat;
+            opacity: 0.3;
+            z-index: 0;
+            animation: fall 10s linear infinite;
+        }
+        
+        body::before {
+            left: 10%;
+            top: -150px;
+            animation-duration: 12s;
+            animation-delay: 0s;
+        }
+        
+        body::after {
+            right: 15%;
+            top: -150px;
+            animation-duration: 15s;
+            animation-delay: 2s;
+        }
+        
+        .extra-leaf1 {
+            top: -120px;
+            left: 60%;
+            animation-duration: 10s;
+            animation-delay: 1s;
+        }
+        
+        .extra-leaf2 {
+            top: -140px;
+            left: 40%;
+            animation-duration: 18s;
+            animation-delay: 1.5s;
+        }
+        
+        .extra-leaf3 {
+            top: -160px;
+            left: 80%;
+            animation-duration: 14s;
+            animation-delay: 2s;
+        }
+        
+        /* Animation for Falling Leaves */
+        @keyframes fall {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0.5;
+            }
+            50% {
+                opacity: 1;
+                transform: translateY(50vh) rotate(180deg);
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0.5;
+            }
+        }
+        
+        /* Animations for Main Content */
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        
+    </style>
+</head>
+
+<body>
+    <!-- Additional Leaves -->
+    <div class="extra-leaf1"></div>
+    <div class="extra-leaf2"></div>
+    <div class="extra-leaf3"></div>
+
+    <div class="container container-custom text-center">
+        <h1 class="header">Text to Video Generator</h1>
+        <div class="content">
+            <form method="POST" action="/save">
+                <label for="text" class="form-label">Enter Text:</label>
+                <textarea id="text" name="text" rows="10" class="form-control textarea" required></textarea><br>
+                <button type="submit" class="btn button mt-3">Convert</button>
+            </form>
+        </div>
+        <a href="/download" download class="download-link mt-4">Download Video</a>
+    </div>
+
+    <!-- Bootstrap JS and Popper.js -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+</body>
+
+</html>
